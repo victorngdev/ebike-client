@@ -1,0 +1,38 @@
+.elementor-populate-background {
+    width: 100%;
+    min-height: 770px;
+
+    .elementor-populate-content {
+        width: 60%;
+        height: 100%;
+        margin: auto;
+        padding-top: 15%;
+
+        h1 {
+            color: #fff;
+            font-size: 59px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #fff;
+            font-size: 29px;
+        }
+
+        .favourite-content-forward {
+            width: 100%;
+            margin: 100px 0 0 30px;
+
+            button {
+                display: inline-block;
+                color: #fff;
+                font: 20px Montserrat, sans-serif;
+                font-weight: 500;
+                background: #bc0000;
+                padding: 20px 40px;
+                text-transform: uppercase;
+                border-radius: 10px;
+            }
+        }
+    }
+}

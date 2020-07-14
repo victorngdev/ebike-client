@@ -1,0 +1,42 @@
+.elementor-header {
+    padding: 50px 12.5%;
+}
+
+.elementor-row {
+    background: #fff;
+    width: 100%;
+    display: block;
+
+    .elementor-element-header,
+    .elementor-element-content {
+        margin-bottom: 20px;
+    }
+
+    .elementor-element-header {
+        position: relative;
+        width: 100%;
+    }
+
+    .elementor-element-header h1 {
+        width: 100%;
+        color: #000;
+        font-size: 29px;
+        font-weight: 500;
+    }
+
+    .elementor-element-action {
+        width: 100%;
+    }
+
+    .elementor-element-content {
+        position: relative;
+        width: 100%;
+
+        p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 2.5;
+            color: #000;
+        }
+    }
+}

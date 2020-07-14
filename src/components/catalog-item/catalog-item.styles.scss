@@ -1,0 +1,25 @@
+.sidebar-left-li {
+    cursor: pointer;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 21px;
+    color: #555;
+    padding-top: 2%;
+    padding-bottom: 0;
+
+    &.selected {
+        color: #fff;
+    }
+
+    &:hover .b-btm-clr {
+        border-bottom: 3px solid #fff;
+    }
+
+    &:hover {
+        color: #fff;
+    }
+
+    .b-btm-clr {
+        border-bottom: 2px solid #555;
+    }
+}

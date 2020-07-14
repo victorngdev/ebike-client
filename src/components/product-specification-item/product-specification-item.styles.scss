@@ -1,0 +1,16 @@
+.product-specification {
+    .h-22 {
+        line-height: 22px;
+    }
+
+    label {
+        color: #fff;
+        font-weight: 700;
+        font-style: normal;
+
+        &.value {
+            font-size: 25px;
+            line-height: 20px;
+        }
+    }
+}
