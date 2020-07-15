@@ -1,0 +1,54 @@
+.way-get-bike {
+    position: relative;
+    background: #000;
+    width: 100%;
+    min-height: 50vh;
+
+    .way-get-bike-header {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+        padding: 70px 0 20px 0;
+
+        .title {
+            position: relative;
+            display: block;
+            margin: auto;
+
+            h2 {
+                display: block;
+                font: 39px Montserrat, sans-serif;
+                color: #fff;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .way-get-bike-content {
+        position: relative;
+        width: 100%;
+        display: block;
+        padding-bottom: 50px;
+
+        h2,
+        p {
+            display: block;
+            margin: 30px 0;
+            color: #fff;
+            font-weight: 300;
+        }
+
+        h2 {
+            color: #bc0000;
+            font: 29px Montserrat, sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 16px;
+            padding: 0 20%;
+        }
+    }
+}
