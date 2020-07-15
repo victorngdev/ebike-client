@@ -1,0 +1,29 @@
+.message {
+    margin-top: 10px;
+}
+
+.email,
+.message {
+    label {
+        width: 100%;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        font-size: 1.1rem;
+        color: #d9d9d9;
+        background: #151515;
+        padding-left: 10px;
+        border: 1px solid #222;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline-color: #3498db;
+    }
+
+    input {
+        height: 35px;
+    }
+}
