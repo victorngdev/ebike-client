@@ -156,3 +156,19 @@ footer {
         }
     }
 }
+
+@media screen and (max-width: 900px) {
+    footer {
+        position: relative;
+        bottom: 0;
+
+        .footer-main-container {
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            .box {
+                margin: 5px 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+.specification {
+    background: #fff;
+    padding: 60px 0;
+
+    .specification-header {
+        margin: 0 0 20px 0;
+
+        h3 {
+            font: 18px Montserrat, sans-serif;
+            font-weight: 300;
+        }
+
+        h1 {
+            font: 36px Montserrat, sans-serif;
+            font-weight: 300;
+            line-height: 25px;
+        }
+    }
+
+    .row {
+        .line-seperator {
+            position: relative;
+
+            &::before {
+                position: absolute;
+                content: "";
+                border-top: 1px solid rgb(233, 233, 233);
+                bottom: 10%;
+                width: 90%;
+            }
+        }
+
+        .specification-name,
+        .specification-value {
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .specification-name {
+            display: inline;
+            font-weight: bold;
+        }
+    }
+}

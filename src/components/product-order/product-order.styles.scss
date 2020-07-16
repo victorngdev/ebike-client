@@ -1,0 +1,89 @@
+.section-sfs_feature {
+    background: #000;
+    padding: 20px 0 20px 0;
+
+    .sfs_featured_titleWrap {
+        text-align: center;
+        width: 100%;
+
+        p {
+            font: 18px Poppins, sans-serif;
+            color: #f1f1f1;
+        }
+
+        h1 {
+            font: 40px Montserrat, sans-serif;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+    }
+
+    .featured_product {
+        padding-top: 60px;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .step {
+            border-top: 1px solid #000;
+            padding-top: 60px;
+            position: relative;
+
+            span {
+                color: #fff;
+                font-size: 20px;
+            }
+
+            .grey {
+                color: #666;
+            }
+
+            h3 {
+                font: 21px Poppins, sans-serif;
+                margin: 0 0 10px;
+                font-weight: 500;
+            }
+
+            .line {
+                position: relative;
+                border: 1px solid red;
+                width: 40%;
+            }
+
+            h2 {
+                font-weight: 400;
+                color: #fff;
+                font-size: 36px;
+                margin-top: 18px;
+                margin-bottom: 0;
+            }
+
+            h4 {
+                font-size: 18px;
+                margin-top: 10px;
+                font-weight: 400;
+            }
+
+            p {
+                font-size: 15px;
+                padding: 10px 0 10px 0;
+                margin: 10px 0;
+                color: #fff;
+                font-weight: 400;
+            }
+
+            button {
+                text-transform: none;
+                background: #c6181c;
+                padding: 6px 18px;
+                font: 22px Poppins, sans-serif;
+                font-weight: 500;
+                color: #fff;
+            }
+        }
+    }
+}
