@@ -7,6 +7,7 @@ import "./App.css";
 import HomePage from "./pages/homepage/homepage.component";
 import Footer from "./components/footer/footer.component";
 import ProductPage from "./pages/product/product.component";
+import SignInAndSignUp from "./pages/signin-and-signup/signin-and-signup.component";
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/product/:bikeId" component={ProductPage} />
+                    <Route path="/authentication" component={SignInAndSignUp} />
                 </Switch>
                 <Footer />
             </div>

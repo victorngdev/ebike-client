@@ -3,7 +3,7 @@ import React from "react";
 import "./form-input.styles.scss";
 
 const FormInput = ({ handleChange, label, area, ...otherProps }) => (
-    <div className={label.toLowerCase()}>
+    <div className="form-input">
         <div className="text">{label}</div>
         <label>
             {area ? (

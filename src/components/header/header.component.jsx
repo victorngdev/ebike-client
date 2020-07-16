@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./header.styles.scss";
 import Logo from "../../assets/logo-white.webp";
+import CartIcon from "../cart-icon/cart-icon.component";
 
 const Header = () => (
     <div className="header">
@@ -38,12 +39,13 @@ const Header = () => (
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">
+                        <Link className="nav-link" to="/authentication">
                             Sign In
                         </Link>
                     </li>
                 </ul>
             </div>
+            <CartIcon />
         </nav>
     </div>
 );
