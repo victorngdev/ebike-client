@@ -1,11 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
+import CartIcon from "../cart-icon/cart-icon.component";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { auth } from "../../firebase/firebase.utils";
 
 import "./header.styles.scss";
 import Logo from "../../assets/logo-white.webp";
-import CartIcon from "../cart-icon/cart-icon.component";
 
-const Header = () => (
+const Header = ({ currentUser }) => (
     <div className="header">
         <nav className="container navbar navbar-expand-lg navbar-dark">
             <Link className="navbar-brand" to="/">
@@ -38,11 +43,22 @@ const Header = () => (
                             Shop
                         </Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/authentication">
-                            Sign In
-                        </Link>
-                    </li>
+                    {currentUser ? (
+                        <li className="nav-item">
+                            <div
+                                className="nav-link"
+                                onClick={() => auth.signOut()}
+                            >
+                                Sign Out
+                            </div>
+                        </li>
+                    ) : (
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/authentication">
+                                Sign In
+                            </Link>
+                        </li>
+                    )}
                 </ul>
             </div>
             <CartIcon />
@@ -50,4 +66,8 @@ const Header = () => (
     </div>
 );
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(Header);
