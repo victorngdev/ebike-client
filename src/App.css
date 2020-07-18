@@ -3,6 +3,10 @@
     font-family: "Open Sans Condensed", sans-serif;
 }
 
+body {
+    background: #000;
+}
+
 a {
     text-decoration: none !important;
     color: #fff;

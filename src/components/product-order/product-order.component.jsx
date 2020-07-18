@@ -18,10 +18,10 @@ const ProductOrder = ({ selectedItem, addItem }) => (
                 </div>
             </div>
             <div className="row featured_product">
-                <div className="col-lg-8 col-md-12">
+                <div className="col-lg-7 col-md-12">
                     <img src={selectedItem.imageUrl} alt="product" />
                 </div>
-                <div className="col-lg-4 col-md-12">
+                <div className="col-lg-5 col-md-12">
                     <div className="step">
                         <h3 className="grey">AVAILABLE FOR ONLY</h3>
                         <div className="line"></div>

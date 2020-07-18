@@ -3,16 +3,18 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import Header from "./components/header/header.component";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
-import "./App.css";
+import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
 import Footer from "./components/footer/footer.component";
 import ProductPage from "./pages/product/product.component";
+import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUp from "./pages/signin-and-signup/signin-and-signup.component";
 import { setCurrentUser } from "./redux/user/user.actions";
+
+import "./App.css";
 
 class App extends React.Component {
 
@@ -47,6 +49,7 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/product/:bikeId" component={ProductPage} />
+                    <Route path="/checkout" component={CheckoutPage} />
                     <Route path="/authentication" render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SignInAndSignUp />)} />
                 </Switch>
                 <Footer />
