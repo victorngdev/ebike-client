@@ -33,7 +33,12 @@ const ProductOrder = ({ selectedItem, addItem }) => (
                         <p>
                             <CustomButton
                                 onClick={() =>
-                                    addItem({ product: selectedItem.id })
+                                    addItem({
+                                        id: selectedItem.id,
+                                        name: selectedItem.name,
+                                        price: selectedItem.price,
+                                        imageUrl: selectedItem.imageUrl,
+                                    })
                                 }
                             >
                                 Add To Cart
