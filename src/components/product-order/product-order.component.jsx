@@ -4,10 +4,11 @@ import { createStructuredSelector } from "reselect";
 
 import CustomButton from "../custom-button/custom-button.component";
 import { selectHoverItem } from "../../redux/catalog/catalog.selectors";
+import { addItemToCart } from "../../redux/cart/cart.actions";
 
 import "./product-order.styles.scss";
 
-const ProductOrder = ({ selectedItem }) => (
+const ProductOrder = ({ selectedItem, addItem }) => (
     <section className="section-sfs_feature">
         <div className="container">
             <div className="row">
@@ -30,9 +31,13 @@ const ProductOrder = ({ selectedItem }) => (
                         <br />
                         <p>{selectedItem.description}</p>
                         <p>
-                            AVAILABLE IN TORCH, GHOST, OR GRAPHITE <br />
-                            <br />
-                            <CustomButton>Order Now</CustomButton>
+                            <CustomButton
+                                onClick={() =>
+                                    addItem({ product: selectedItem.id })
+                                }
+                            >
+                                Add To Cart
+                            </CustomButton>
                             <br />
                             <br />
                             <span
@@ -53,4 +58,8 @@ const mapStateToProps = createStructuredSelector({
     selectedItem: selectHoverItem,
 });
 
-export default connect(mapStateToProps)(ProductOrder);
+const mapDispatchToProps = dispatch => ({
+    addItem: item => dispatch(addItemToCart(item)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductOrder);

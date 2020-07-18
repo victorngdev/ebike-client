@@ -23,7 +23,7 @@ const ProductCatalog = ({ collections, selectedItem, selectItem }) => (
             <aside className="col-md-5 catalog-title">
                 <div>
                     <h2 className="sidebar-left-heading">
-                        CHOOSE YOUR SONDORS
+                        CHOOSE YOUR EDITIONS
                     </h2>
                 </div>
                 <ul className="custom-ul p-0 w-90">

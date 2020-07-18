@@ -3,7 +3,7 @@ import CatalogActionTypes from "./catalog.types";
 
 const INITIAL_STATE = {
     collections: CATALOG,
-    selectedItem: null
+    selectedItem: CATALOG[0]
 }
 
 const catalogReducer = (state = INITIAL_STATE, action) => {
@@ -14,10 +14,7 @@ const catalogReducer = (state = INITIAL_STATE, action) => {
                 selectedItem: action.payload
             }
         default:
-            return {
-                ...state,
-                selectedItem: state.collections[0]
-            }
+            return state;
     }
 }
 
