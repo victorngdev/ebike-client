@@ -1,9 +1,8 @@
-import CATALOG from "./catalog.data";
 import CatalogActionTypes from "./catalog.types";
 
 const INITIAL_STATE = {
-    collections: CATALOG,
-    selectedItem: CATALOG[0]
+    collections: [],
+    selectedItem: null
 }
 
 const catalogReducer = (state = INITIAL_STATE, action) => {
@@ -12,6 +11,17 @@ const catalogReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 selectedItem: action.payload
+            }
+        case CatalogActionTypes.FETCH_BIKES:
+            return {
+                ...state,
+                collections: action.payload.collections,
+                selectedItem: action.payload.initItem
+            }
+        case CatalogActionTypes.INIT_SELECTED_ITEM:
+            return {
+                ...state,
+                selectedItem: state.collections[0]
             }
         default:
             return state;
