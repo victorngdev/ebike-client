@@ -1,7 +1,7 @@
 import React from "react";
 
 import DiffrenceItem from "../difference-item/difference-item.component";
-import { DIFFERENCES } from "./difference.data";
+import api from "../../apis/api";
 
 import "./difference.styles.scss";
 
@@ -10,8 +10,14 @@ class Difference extends React.Component {
         super();
 
         this.state = {
-            differences: DIFFERENCES,
+            differences: [],
         };
+    }
+
+    componentDidMount() {
+        api.get("/differences").then(response =>
+            this.setState({ differences: response.data })
+        );
     }
 
     render() {

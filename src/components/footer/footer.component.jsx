@@ -2,6 +2,7 @@ import React from "react";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
+import api from "../../apis/api";
 
 import "./footer.styles.scss";
 
@@ -10,18 +11,18 @@ class Footer extends React.Component {
         super();
 
         this.state = {
-            contact: {
-                address: "349 Quang Trung",
-                phone: "+84 31 738 872",
-                email: "cephiroth@gmail.com",
-                quote:
-                    "We hope that this will be the first of many International recognitions for SONDORS as we continue to inspire, innovate, and perfect our current and future products for tech-minded, adventure-seeking consumers around the world!",
-            },
+            contact: null,
             request: {
                 email: "",
                 message: "",
             },
         };
+    }
+
+    componentDidMount() {
+        api.get("/abouts").then(response =>
+            this.setState({ contact: response.data })
+        );
     }
 
     handleSubmit = event => {
@@ -37,14 +38,14 @@ class Footer extends React.Component {
     };
 
     render() {
-        const { address, phone, email, quote } = this.state.contact;
-        return (
+        const { contact } = this.state;
+        return contact ? (
             <footer>
                 <div className="footer-main-container">
                     <div className="left box">
                         <h2>About us</h2>
                         <div className="content">
-                            <p>{quote}</p>
+                            <p>{contact.quote}</p>
                             <div className="social">
                                 <i className="fab fa-facebook"></i>
                                 <i className="fab fa-twitter"></i>
@@ -58,15 +59,15 @@ class Footer extends React.Component {
                         <div className="content">
                             <div className="place">
                                 <span className="fas fa-map-marker-alt"></span>
-                                <span className="text">{address}</span>
+                                <span className="text">{contact.address}</span>
                             </div>
                             <div className="phone">
                                 <span className="fas fa-phone-alt"></span>
-                                <span className="text">{phone}</span>
+                                <span className="text">{contact.phone}</span>
                             </div>
                             <div className="place">
                                 <span className="fas fa-envelope"></span>
-                                <span className="text">{email}</span>
+                                <span className="text">{contact.email}</span>
                             </div>
                         </div>
                     </div>
@@ -110,7 +111,7 @@ class Footer extends React.Component {
                     </div>
                 </div>
             </footer>
-        );
+        ) : null;
     }
 }
 
