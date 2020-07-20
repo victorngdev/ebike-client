@@ -23,6 +23,11 @@ const catalogReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 selectedItem: state.collections[0]
             }
+        case CatalogActionTypes.FETCH_BIKE_DETAILS:
+            return {
+                ...state,
+                selectedItem: action.payload
+            }
         default:
             return state;
     }

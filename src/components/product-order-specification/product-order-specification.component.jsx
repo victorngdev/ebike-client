@@ -1,8 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-
-import { selectHoverItem } from "../../redux/catalog/catalog.selectors";
 
 import "./product-order-specification.styles.scss";
 
@@ -16,7 +12,7 @@ const ProductOrderSpecification = ({
         </div>
         <div className="row">
             {specifications.map(({ name, value }) => (
-                <div key={name} className="col-sm-4 line-seperator">
+                <div key={name} className="col-md-4 col-sm-6 line-seperator">
                     <p className="specification-name">{name}</p>
                     <p className="specification-value">{value}</p>
                 </div>
@@ -25,8 +21,4 @@ const ProductOrderSpecification = ({
     </div>
 );
 
-const mapStateToProps = createStructuredSelector({
-    selectedItem: selectHoverItem,
-});
-
-export default connect(mapStateToProps)(ProductOrderSpecification);
+export default ProductOrderSpecification;

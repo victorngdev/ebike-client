@@ -17,6 +17,10 @@ export const fetchBikes = () => async dispatch => {
     })
 }
 
-export const initSelectedItem = () => dispatch => {
-    dispatch({ type: CatalogActionTypes.INIT_SELECTED_ITEM })
+export const fetchBikeDetails = bikeTitle => async dispatch => {
+    const response = await api.get(`/bikes/${bikeTitle}`);
+    dispatch({
+        type: CatalogActionTypes.FETCH_BIKE_DETAILS,
+        payload: response.data
+    })
 }

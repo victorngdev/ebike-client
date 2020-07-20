@@ -9,11 +9,7 @@ import {
     selectCollectionsFromCatalog,
     selectHoverItem,
 } from "../../redux/catalog/catalog.selectors";
-import {
-    getHoverItem,
-    fetchBikes,
-    initSelectedItem,
-} from "../../redux/catalog/catalog.actions";
+import { getHoverItem, fetchBikes } from "../../redux/catalog/catalog.actions";
 
 import "./catalog.styles.scss";
 
@@ -108,5 +104,4 @@ const mapStateToProps = createStructuredSelector({
 export default connect(mapStateToProps, {
     getHoverItem,
     fetchBikes,
-    initSelectedItem,
 })(ProductCatalog);
