@@ -18,15 +18,16 @@ class Elementor extends React.Component {
     componentDidMount() {
         api.get("/elementors").then(response =>
             this.setState({ elementors: response.data }, () => {
-                const elementorHeader = this.state.elementors.find(
-                    elementor => elementor.imageUrl === null
+                const elementorHeader = response.data.find(
+                    elementor => typeof elementor.imageUrl === "undefined"
                 );
+                console.log(elementorHeader);
+                this.setState({ elementorHeader });
                 this.setState({
                     elementors: this.state.elementors.filter(
-                        elementor => elementor.imageUrl !== null
+                        elementor => typeof elementor.imageUrl !== "undefined"
                     ),
                 });
-                this.setState({ elementorHeader });
             })
         );
     }
