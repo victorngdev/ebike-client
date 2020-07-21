@@ -2,10 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { checkout } from "../../redux/cart/cart.actions";
+
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import FormInput from "../../components/form-input/form-input.component";
-import Dropdown from "../../components/dropdown/dropdown.component";
-import { getAddress } from "../../apis/api";
+import CustomButton from "../../components/custom-button/custom-button.component";
+import api from "../../apis/api";
 
 import {
     selectCartItems,
@@ -16,26 +19,12 @@ import "./checkout.styles.scss";
 
 class CheckoutPage extends React.Component {
     state = {
-        paymentInfo: {
-            customerName: "",
-            customerEmail: "",
-            customerAddress: "",
-            phone: "",
-            note: "",
-        },
-        cities: [],
-        districts: [],
+        customerName: "",
+        customerEmail: "",
+        customerAddress: "",
+        phone: "",
+        note: "",
     };
-
-    componentDidMount() {
-        getAddress
-            .get("/city")
-            .then(response =>
-                this.setState({ cities: response.data }, () =>
-                    console.log(this.state.cities.length)
-                )
-            );
-    }
 
     renderShowCartItem = (cartItems, total) => (
         <div className="col-lg-7 col-md-12">
@@ -71,58 +60,80 @@ class CheckoutPage extends React.Component {
 
     handleChange = event => {
         const { name, value } = event.target;
-        this.setState({
-            request: { ...this.state.paymentInfo, [name]: value },
-        });
+        this.setState({ [name]: value });
+    };
+
+    handleSubmit = event => {
+        const {
+            customerName,
+            phone,
+            customerAddress,
+            customerEmail,
+            note,
+        } = this.state;
+        const { currentUser, cartItems } = this.props;
+        const uid = currentUser ? currentUser.id : null;
+        event.preventDefault();
+        api.post("/invoices", {
+            customerName,
+            phone,
+            customerAddress,
+            customerEmail,
+            note,
+            uid: uid,
+            bikes: cartItems,
+        }).then(response => this.props.checkout());
     };
 
     renderPaymentInfo = () => (
         <div className="col-lg-5 col-md-12 payment-info">
             <h2>Payment Info</h2>
-            <div className="basic">
-                <FormInput
-                    handleChange={this.handleChange}
-                    label="Your Name"
-                    name="customerName"
-                    type="text"
-                    value={this.state.customerName}
-                    required
-                />
-                <FormInput
-                    handleChange={this.handleChange}
-                    label="Phone"
-                    name="phone"
-                    type="text"
-                    value={this.state.customerName}
-                    required
-                />
-            </div>
+            <form onSubmit={this.handleSubmit}>
+                <div className="basic">
+                    <FormInput
+                        handleChange={this.handleChange}
+                        label="Your Name"
+                        name="customerName"
+                        type="text"
+                        value={this.state.customerName}
+                        required
+                    />
+                    <FormInput
+                        handleChange={this.handleChange}
+                        label="Phone"
+                        name="phone"
+                        type="text"
+                        value={this.state.phone}
+                        required
+                    />
+                </div>
 
-            <FormInput
-                handleChange={this.handleChange}
-                label="Email"
-                name="customerEmail"
-                type="mail"
-                value={this.state.customerEmail}
-                required
-            />
-            {/* <Dropdown /> */}
-            <FormInput
-                handleChange={this.handleChange}
-                label="Address"
-                name="customerAddress"
-                type="text"
-                value={this.state.customerAddress}
-                required
-            />
-            <FormInput
-                handleChange={this.handleChange}
-                label="Note"
-                name="note"
-                type="text"
-                value={this.state.note}
-                area
-            />
+                <FormInput
+                    handleChange={this.handleChange}
+                    label="Email"
+                    name="customerEmail"
+                    type="mail"
+                    value={this.state.customerEmail}
+                    required
+                />
+                <FormInput
+                    handleChange={this.handleChange}
+                    label="Address"
+                    name="customerAddress"
+                    type="text"
+                    value={this.state.customerAddress}
+                    required
+                />
+                <FormInput
+                    handleChange={this.handleChange}
+                    label="Note"
+                    name="note"
+                    type="text"
+                    value={this.state.note}
+                    area
+                />
+                <CustomButton>Send</CustomButton>
+            </form>
         </div>
     );
 
@@ -142,6 +153,11 @@ class CheckoutPage extends React.Component {
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,
     total: selectCartTotal,
+    currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(CheckoutPage);
+const mapDispatchToProps = dispatch => ({
+    checkout: () => dispatch(checkout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

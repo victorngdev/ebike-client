@@ -31,10 +31,7 @@ class Footer extends React.Component {
 
     handleChange = event => {
         const { value, name } = event.target;
-        this.setState(
-            { request: { ...this.state.request, [name]: value } },
-            () => console.log(this.state.request)
-        );
+        this.setState({ request: { ...this.state.request, [name]: value } });
     };
 
     render() {

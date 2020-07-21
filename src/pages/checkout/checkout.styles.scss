@@ -40,6 +40,11 @@
     .payment-info {
         width: 100%;
 
+        h2 {
+            color: #d9d9d9;
+            font-size: 18px;
+        }
+
         .basic {
             display: flex;
             flex-direction: row;
@@ -49,6 +54,14 @@
                 flex-basis: 50%;
                 margin-right: 10px;
             }
+        }
+
+        button {
+            padding: 10px 40px;
+            background: #c6181c;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 500;
         }
     }
 }
