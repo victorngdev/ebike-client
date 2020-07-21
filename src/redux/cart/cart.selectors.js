@@ -20,3 +20,8 @@ export const selectCartTotal = createSelector(
         0
     ).toFixed(2)
 )
+
+export const selectCartLength = createSelector(
+    [selectCartItems],
+    cartItems => cartItems.length
+)

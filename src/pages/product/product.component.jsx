@@ -14,7 +14,6 @@ import "./product.styles.scss";
 class ProductPage extends React.Component {
     componentDidMount() {
         this.props.fetchBikeDetails(this.props.match.params.bikeId);
-        console.log("Hello");
     }
 
     render() {
