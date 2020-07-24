@@ -1,21 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { SemipolarLoading } from "react-loadingg";
 
+import api from "../../apis/api";
 import ProductSpecification from "../../components/product-specification/product-specification.component";
 import CatalogItem from "../../components/catalog-item/catalog-item.component";
-import {
-    selectCollectionsFromCatalog,
-    selectHoverItem,
-} from "../../redux/catalog/catalog.selectors";
-import { getHoverItem, fetchBikes } from "../../redux/catalog/catalog.actions";
 
 import "./catalog.styles.scss";
 
 class ProductCatalog extends React.Component {
+    state = {
+        collections: [],
+        selectedItem: null,
+    };
+
     componentDidMount() {
-        this.props.fetchBikes();
+        api.get("/bikes").then(response =>
+            this.setState({
+                collections: response.data,
+                selectedItem: response.data[0],
+            })
+        );
     }
 
     renderHeader = () => (
@@ -29,7 +34,7 @@ class ProductCatalog extends React.Component {
             {collections.map(item => (
                 <div
                     key={item.id}
-                    onClick={() => this.props.getHoverItem(item)}
+                    onClick={() => this.setState({ selectedItem: item })}
                 >
                     <CatalogItem
                         name={item.name}
@@ -75,33 +80,31 @@ class ProductCatalog extends React.Component {
     );
 
     render() {
-        const { collections, selectedItem } = this.props;
-        return collections.length ? (
+        const { collections, selectedItem } = this.state;
+        return (
             <div className="product-catalog">
                 <div className="header-class">
                     <h1>ELECTRIC FOR EVERYONE</h1>
                 </div>
-                <div className="row m-0">
-                    <ProductSpecification selectedItem={selectedItem} />
-                    <aside className="col-md-5 catalog-title">
-                        {this.renderHeader()}
-                        {this.renderCatalog(collections, selectedItem)}
-                        {this.renderDueToDay(selectedItem)}
-                        {this.renderBuyNow(selectedItem)}
-                        {this.renderDescription()}
-                    </aside>
-                </div>
+                {collections.length && selectedItem ? (
+                    <div className="row m-0">
+                        <ProductSpecification selectedItem={selectedItem} />
+                        <aside className="col-md-5 catalog-title">
+                            {this.renderHeader()}
+                            {this.renderCatalog(collections, selectedItem)}
+                            {this.renderDueToDay(selectedItem)}
+                            {this.renderBuyNow(selectedItem)}
+                            {this.renderDescription()}
+                        </aside>
+                    </div>
+                ) : (
+                    <div className="loading">
+                        <SemipolarLoading />
+                    </div>
+                )}
             </div>
-        ) : null;
+        );
     }
 }
 
-const mapStateToProps = createStructuredSelector({
-    collections: selectCollectionsFromCatalog,
-    selectedItem: selectHoverItem,
-});
-
-export default connect(mapStateToProps, {
-    getHoverItem,
-    fetchBikes,
-})(ProductCatalog);
+export default ProductCatalog;

@@ -1,10 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 import { withRouter } from "react-router-dom";
 
-import { selectHoverItem } from "../../redux/catalog/catalog.selectors";
-import { fetchBikeDetails } from "../../redux/catalog/catalog.actions";
+import api from "../../apis/api";
 
 import ProductOrder from "../../components/product-order/product-order.component";
 import ProductOrderSpecification from "../../components/product-order-specification/product-order-specification.component";
@@ -12,12 +9,18 @@ import ProductOrderSpecification from "../../components/product-order-specificat
 import "./product.styles.scss";
 
 class ProductPage extends React.Component {
+    state = {
+        selectedItem: null,
+    };
+
     componentDidMount() {
-        this.props.fetchBikeDetails(this.props.match.params.bikeId);
+        api.get(`/bikes/${this.props.match.params.bikeId}`).then(response =>
+            this.setState({ selectedItem: response.data })
+        );
     }
 
     render() {
-        const { selectedItem } = this.props;
+        const { selectedItem } = this.state;
         return selectedItem &&
             typeof selectedItem.specifications !== "undefined" ? (
             <div className="product-page">
@@ -28,10 +31,4 @@ class ProductPage extends React.Component {
     }
 }
 
-const mapStateToProps = createStructuredSelector({
-    selectedItem: selectHoverItem,
-});
-
-export default withRouter(
-    connect(mapStateToProps, { fetchBikeDetails })(ProductPage)
-);
+export default withRouter(ProductPage);

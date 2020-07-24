@@ -21,7 +21,6 @@ class Elementor extends React.Component {
                 const elementorHeader = response.data.find(
                     elementor => typeof elementor.imageUrl === "undefined"
                 );
-                console.log(elementorHeader);
                 this.setState({ elementorHeader });
                 this.setState({
                     elementors: this.state.elementors.filter(
