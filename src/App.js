@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
-import { selectCartItems } from "./redux/cart/cart.selectors";
+import { selectCartLength } from "./redux/cart/cart.selectors";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import Header from "./components/header/header.component";
@@ -51,7 +51,7 @@ class App extends React.Component {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/catalogs/:bikeId" component={ProductPage} />
                     <Route path="/collections/apparel" component={Apparel} />
-                    <Route path="/checkout" render={() => this.props.cartItems.length === 0 ? (<Redirect to="/" />) : (<CheckoutPage />)} />
+                    <Route path="/checkout" render={() => this.props.cartLength === 0 ? (<Redirect to="/" />) : (<CheckoutPage />)} />
                 </Switch>
                 <Footer />
             </div>
@@ -62,7 +62,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    cartItems: selectCartItems
+    cartLength: selectCartLength
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -11,8 +11,9 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import api from "../../apis/api";
 
 import {
-    selectCartItems,
+    selectBikeItems,
     selectCartTotal,
+    selectApparelItems,
 } from "../../redux/cart/cart.selectors";
 
 import "./checkout.styles.scss";
@@ -26,7 +27,35 @@ class CheckoutPage extends React.Component {
         note: "",
     };
 
-    renderShowCartItem = (cartItems, total) => (
+    handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+    };
+
+    handleSubmit = event => {
+        const {
+            customerName,
+            phone,
+            customerAddress,
+            customerEmail,
+            note,
+        } = this.state;
+        const { currentUser, bikeItems, apparelItems } = this.props;
+        const uid = currentUser ? currentUser.id : null;
+        event.preventDefault();
+        api.post("/invoices", {
+            customerName,
+            phone,
+            customerAddress,
+            customerEmail,
+            note,
+            uid: uid,
+            bikes: bikeItems,
+            apparels: apparelItems,
+        }).then(response => this.props.checkout());
+    };
+
+    renderShowCartItem = (bikeItems, apparelItems, total) => (
         <div className="col-lg-7 col-md-12">
             <div className="checkout-page">
                 <div className="checkout-page">
@@ -47,8 +76,18 @@ class CheckoutPage extends React.Component {
                             <span>Remove</span>
                         </div>
                     </div>
-                    {cartItems.map(cartItem => (
-                        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+                    {bikeItems.map(cartItem => (
+                        <CheckoutItem
+                            key={cartItem.id}
+                            cartItem={cartItem}
+                            isBike
+                        />
+                    ))}
+                    {apparelItems.map(apparelItem => (
+                        <CheckoutItem
+                            key={apparelItem.id}
+                            cartItem={apparelItem}
+                        />
                     ))}
                     <div className="total">
                         <span>TOTAL: ${total}</span>
@@ -57,33 +96,6 @@ class CheckoutPage extends React.Component {
             </div>
         </div>
     );
-
-    handleChange = event => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-    };
-
-    handleSubmit = event => {
-        const {
-            customerName,
-            phone,
-            customerAddress,
-            customerEmail,
-            note,
-        } = this.state;
-        const { currentUser, cartItems } = this.props;
-        const uid = currentUser ? currentUser.id : null;
-        event.preventDefault();
-        api.post("/invoices", {
-            customerName,
-            phone,
-            customerAddress,
-            customerEmail,
-            note,
-            uid: uid,
-            bikes: cartItems,
-        }).then(response => this.props.checkout());
-    };
 
     renderPaymentInfo = () => (
         <div className="col-lg-5 col-md-12 payment-info">
@@ -138,11 +150,11 @@ class CheckoutPage extends React.Component {
     );
 
     render() {
-        const { cartItems, total } = this.props;
+        const { bikeItems, apparelItems, total } = this.props;
         return (
             <div className="container-fluid w-85">
                 <div className="row">
-                    {this.renderShowCartItem(cartItems, total)}
+                    {this.renderShowCartItem(bikeItems, apparelItems, total)}
                     {this.renderPaymentInfo()}
                 </div>
             </div>
@@ -151,7 +163,8 @@ class CheckoutPage extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-    cartItems: selectCartItems,
+    bikeItems: selectBikeItems,
+    apparelItems: selectApparelItems,
     total: selectCartTotal,
     currentUser: selectCurrentUser,
 });

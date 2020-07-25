@@ -41,8 +41,11 @@ const Apparel = () => {
                     </div>
                     <div className="apparel-collections">
                         <div className="row">
-                            {apparels.map(({ id, ...otherProps }) => (
-                                <ApparelItem key={id} {...otherProps} />
+                            {apparels.map(apparelItem => (
+                                <ApparelItem
+                                    key={apparelItem.id}
+                                    apparelItem={apparelItem}
+                                />
                             ))}
                         </div>
                     </div>

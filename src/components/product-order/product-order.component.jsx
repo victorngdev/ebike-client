@@ -32,12 +32,15 @@ const ProductOrder = ({ selectedItem, addItem }) => {
                             <p>
                                 <CustomButton
                                     onClick={() =>
-                                        addItem({
-                                            id: selectedItem.id,
-                                            name: selectedItem.name,
-                                            price: selectedItem.price,
-                                            imageUrl: selectedItem.imageUrl,
-                                        })
+                                        addItem(
+                                            {
+                                                id: selectedItem.id,
+                                                name: selectedItem.name,
+                                                price: selectedItem.price,
+                                                imageUrl: selectedItem.imageUrl,
+                                            },
+                                            true
+                                        )
                                     }
                                 >
                                     Add To Cart
@@ -63,7 +66,7 @@ const ProductOrder = ({ selectedItem, addItem }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    addItem: item => dispatch(addItemToCart(item)),
+    addItem: (item, isBike) => dispatch(addItemToCart(item, isBike)),
 });
 
 export default connect(null, mapDispatchToProps)(ProductOrder);

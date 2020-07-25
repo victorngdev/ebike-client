@@ -11,7 +11,7 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 import "./header.styles.scss";
-import Logo from "../../assets/logo-white.webp";
+import Logo from "../../assets/INTENSELOGO.webp";
 
 const Header = ({ currentUser, hidden }) => (
     <div className="header">

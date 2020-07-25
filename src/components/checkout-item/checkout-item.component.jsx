@@ -9,7 +9,7 @@ import {
 
 import "./checkout-item.styles.scss";
 
-const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
+const CheckoutItem = ({ cartItem, isBike, clearItem, addItem, removeItem }) => {
     const { id, name, imageUrl, price, quantity } = cartItem;
     return (
         <div className="checkout-item">
@@ -20,16 +20,22 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
             </div>
             <span className="name">{name}</span>
             <span className="quantity">
-                <div className="arrow" onClick={() => removeItem(id)}>
+                <div className="arrow" onClick={() => removeItem(id, isBike)}>
                     &#10094;
                 </div>
                 <span className="value">{quantity}</span>
-                <div className="arrow" onClick={() => addItem(cartItem)}>
+                <div
+                    className="arrow"
+                    onClick={() => addItem(cartItem, isBike)}
+                >
                     &#10095;
                 </div>
             </span>
             <span className="price">{price}</span>
-            <div className="remove-button" onClick={() => clearItem(id)}>
+            <div
+                className="remove-button"
+                onClick={() => clearItem(id, isBike)}
+            >
                 &#10005;
             </div>
         </div>
@@ -37,9 +43,10 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    clearItem: itemId => dispatch(clearItemFromCart(itemId)),
-    addItem: item => dispatch(addItemToCart(item)),
-    removeItem: itemId => dispatch(removeItemFromCart(itemId)),
+    clearItem: (itemId, isBike) => dispatch(clearItemFromCart(itemId, isBike)),
+    addItem: (item, isBike) => dispatch(addItemToCart(item, isBike)),
+    removeItem: (itemId, isBike) =>
+        dispatch(removeItemFromCart(itemId, isBike)),
 });
 
 export default connect(null, mapDispatchToProps)(CheckoutItem);

@@ -3,7 +3,8 @@ import { addItemToCart, removeItemFromCart } from "./cart.utils";
 
 const INITIAL_STATE = {
     hidden: true,
-    cartItems: []
+    bikeItems: [],
+    apparelItems: []
 }
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -13,27 +14,45 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 hidden: !state.hidden
             }
-        case CartActionTypes.ADD_ITEM:
+        case CartActionTypes.ADD_BIKE_ITEM:
             return {
                 ...state,
-                cartItems: addItemToCart(state.cartItems, action.payload)
+                bikeItems: addItemToCart(state.bikeItems, action.payload)
             }
-        case CartActionTypes.REMOVE_ITEM:
+        case CartActionTypes.REMOVE_BIKE_ITEM:
             return {
                 ...state,
-                cartItems: removeItemFromCart(state.cartItems, action.payload)
+                bikeItems: removeItemFromCart(state.bikeItems, action.payload)
             }
-        case CartActionTypes.CLEAR_ITEM_FROM_CART:
+        case CartActionTypes.CLEAR_BIKE_ITEM_FROM_CART:
             return {
                 ...state,
-                cartItems: state.cartItems.filter(
+                bikeItems: state.bikeItems.filter(
+                    cartItem => cartItem.id !== action.payload
+                )
+            }
+        case CartActionTypes.ADD_APPAREL_ITEM:
+            return {
+                ...state,
+                apparelItems: addItemToCart(state.apparelItems, action.payload)
+            }
+        case CartActionTypes.REMOVE_APPAREL_ITEM:
+            return {
+                ...state,
+                apparelItems: removeItemFromCart(state.apparelItems, action.payload)
+            }
+        case CartActionTypes.CLEAR_APPAREL_ITEM_FROM_CART:
+            return {
+                ...state,
+                apparelItems: state.apparelItems.filter(
                     cartItem => cartItem.id !== action.payload
                 )
             }
         case CartActionTypes.CHECKOUT:
             return {
                 ...state,
-                cartItems: []
+                bikeItems: [],
+                apparelItems: []
             }
         default:
             return state;

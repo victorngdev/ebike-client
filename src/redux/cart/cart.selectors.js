@@ -7,21 +7,28 @@ export const selectCartHidden = createSelector(
     cart => cart.hidden
 )
 
-export const selectCartItems = createSelector(
+export const selectBikeItems = createSelector(
     [selectCart],
-    cart => cart.cartItems
+    cart => cart.bikeItems
+)
+
+export const selectApparelItems = createSelector(
+    [selectCart],
+    cart => cart.apparelItems
 )
 
 export const selectCartTotal = createSelector(
-    [selectCartItems],
-    cartItems => cartItems.reduce(
-        (accumalatedQuantity, cartItem) =>
-            accumalatedQuantity + cartItem.quantity * cartItem.price,
+    [selectBikeItems, selectApparelItems],
+    (bikeItems, apparelItems) => (bikeItems.reduce(
+        (accumalatedQuantity, bikeItem) =>
+            accumalatedQuantity + bikeItem.quantity * bikeItem.price,
         0
-    ).toFixed(2)
+    ) + apparelItems.reduce((accumalatedQuantity, item) =>
+        accumalatedQuantity + item.quantity * item.price,
+        0)).toFixed(2)
 )
 
 export const selectCartLength = createSelector(
-    [selectCartItems],
-    cartItems => cartItems.length
+    [selectBikeItems, selectApparelItems],
+    (bikeItems, apparelItems) => bikeItems.length + apparelItems.length
 )
