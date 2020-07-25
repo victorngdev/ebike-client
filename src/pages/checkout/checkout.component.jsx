@@ -40,7 +40,7 @@ class CheckoutPage extends React.Component {
             customerEmail,
             note,
         } = this.state;
-        const { currentUser, bikeItems, apparelItems } = this.props;
+        const { currentUser, bikeItems, apparelItems, total } = this.props;
         const uid = currentUser ? currentUser.id : null;
         event.preventDefault();
         api.post("/invoices", {
@@ -49,6 +49,7 @@ class CheckoutPage extends React.Component {
             customerAddress,
             customerEmail,
             note,
+            total,
             uid: uid,
             bikes: bikeItems,
             apparels: apparelItems,
