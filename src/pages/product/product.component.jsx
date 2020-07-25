@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import api from "../../apis/api";
+import { SemipolarLoading } from "react-loadingg";
 
 import ProductOrder from "../../components/product-order/product-order.component";
 import ProductOrderSpecification from "../../components/product-order-specification/product-order-specification.component";
@@ -21,13 +22,16 @@ class ProductPage extends React.Component {
 
     render() {
         const { selectedItem } = this.state;
-        return selectedItem &&
-            typeof selectedItem.specifications !== "undefined" ? (
+        return selectedItem ? (
             <div className="product-page">
                 <ProductOrder selectedItem={selectedItem} />
                 <ProductOrderSpecification selectedItem={selectedItem} />
             </div>
-        ) : null;
+        ) : (
+            <div className="loading">
+                <SemipolarLoading />
+            </div>
+        );
     }
 }
 

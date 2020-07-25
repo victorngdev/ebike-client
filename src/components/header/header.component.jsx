@@ -8,7 +8,7 @@ import { selectCartHidden } from "../../redux/cart/cart.selectors";
 
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import { auth } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 import "./header.styles.scss";
 import Logo from "../../assets/logo-white.webp";
@@ -42,8 +42,8 @@ const Header = ({ currentUser, hidden }) => (
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">
-                            Shop
+                        <Link className="nav-link" to="/collections/apparel">
+                            Apparel & Gear
                         </Link>
                     </li>
                     {currentUser ? (
@@ -56,10 +56,8 @@ const Header = ({ currentUser, hidden }) => (
                             </div>
                         </li>
                     ) : (
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/authentication">
-                                Sign In
-                            </Link>
+                        <li className="nav-item" onClick={signInWithGoogle}>
+                            <div className="nav-link">Sign In</div>
                         </li>
                     )}
                     <li className="nav-item">

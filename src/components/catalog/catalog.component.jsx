@@ -61,7 +61,7 @@ class ProductCatalog extends React.Component {
 
     renderBuyNow = selectedItem => (
         <div className="w-90 buy-now">
-            <Link to={`/product/${selectedItem.title}`} className="btn">
+            <Link to={`/catalogs/${selectedItem.title}`} className="btn">
                 Buy Now
             </Link>
         </div>
@@ -81,27 +81,25 @@ class ProductCatalog extends React.Component {
 
     render() {
         const { collections, selectedItem } = this.state;
-        return (
+        return collections.length && selectedItem ? (
             <div className="product-catalog">
                 <div className="header-class">
                     <h1>ELECTRIC FOR EVERYONE</h1>
                 </div>
-                {collections.length && selectedItem ? (
-                    <div className="row m-0">
-                        <ProductSpecification selectedItem={selectedItem} />
-                        <aside className="col-md-5 catalog-title">
-                            {this.renderHeader()}
-                            {this.renderCatalog(collections, selectedItem)}
-                            {this.renderDueToDay(selectedItem)}
-                            {this.renderBuyNow(selectedItem)}
-                            {this.renderDescription()}
-                        </aside>
-                    </div>
-                ) : (
-                    <div className="loading">
-                        <SemipolarLoading />
-                    </div>
-                )}
+                <div className="row m-0">
+                    <ProductSpecification selectedItem={selectedItem} />
+                    <aside className="col-md-5 catalog-title">
+                        {this.renderHeader()}
+                        {this.renderCatalog(collections, selectedItem)}
+                        {this.renderDueToDay(selectedItem)}
+                        {this.renderBuyNow(selectedItem)}
+                        {this.renderDescription()}
+                    </aside>
+                </div>
+            </div>
+        ) : (
+            <div className="loading">
+                <SemipolarLoading />
             </div>
         );
     }

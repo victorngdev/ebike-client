@@ -20,3 +20,8 @@ a:hover {
 .App {
     min-height: 100vh;
 }
+
+.loading {
+    min-height: 100vh;
+    width: 100%;
+}

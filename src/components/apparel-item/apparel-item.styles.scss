@@ -1,0 +1,70 @@
+.apparel-item {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+
+    .apparel-image {
+        position: relative;
+        max-height: 387px;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0 30px;
+
+        &:hover {
+            .button {
+                visibility: visible;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .button {
+            position: absolute;
+            bottom: 25%;
+            left: 25%;
+            z-index: 10000;
+            visibility: hidden;
+
+            span {
+                cursor: pointer;
+                color: #fff;
+                padding: 10px 25px;
+                background: #ff0000;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .apparel-info {
+        width: 100%;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+
+        h2 {
+            font-size: 1.75rem;
+            font-family: "Bebas Neue", cursive;
+            color: #fff;
+            font-style: italic;
+        }
+
+        .producer {
+            font-size: 16px;
+            color: #777;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .price {
+            color: #fff;
+            font: 1.55rem "Bebas Neue", cursive;
+        }
+    }
+}
