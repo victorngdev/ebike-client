@@ -17,6 +17,11 @@ export const selectApparelItems = createSelector(
     cart => cart.apparelItems
 )
 
+export const selectOrders = createSelector(
+    [selectCart],
+    cart => cart.orders
+)
+
 export const selectCartTotal = createSelector(
     [selectBikeItems, selectApparelItems],
     (bikeItems, apparelItems) => (bikeItems.reduce(

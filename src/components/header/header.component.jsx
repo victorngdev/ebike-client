@@ -48,6 +48,13 @@ const Header = ({ currentUser, hidden }) => (
                     </li>
                     {currentUser ? (
                         <li className="nav-item">
+                            <Link className="nav-link" to="/orders">
+                                Your Purchase
+                            </Link>
+                        </li>
+                    ) : null}
+                    {currentUser ? (
+                        <li className="nav-item">
                             <div
                                 className="nav-link"
                                 onClick={() => auth.signOut()}

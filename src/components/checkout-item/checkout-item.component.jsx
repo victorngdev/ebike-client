@@ -9,7 +9,16 @@ import {
 
 import "./checkout-item.styles.scss";
 
-const CheckoutItem = ({ cartItem, isBike, clearItem, addItem, removeItem }) => {
+const CheckoutItem = ({
+    cartItem,
+    isBike,
+    isOrder,
+    orderId,
+    clearItem,
+    addItem,
+    removeItem,
+    status,
+}) => {
     const { id, name, imageUrl, price, quantity } = cartItem;
     return (
         <div className="checkout-item">
@@ -20,33 +29,46 @@ const CheckoutItem = ({ cartItem, isBike, clearItem, addItem, removeItem }) => {
             </div>
             <span className="name">{name}</span>
             <span className="quantity">
-                <div className="arrow" onClick={() => removeItem(id, isBike)}>
-                    &#10094;
-                </div>
+                {status ? (
+                    <div
+                        className="arrow"
+                        onClick={() => removeItem(id, isBike, isOrder, orderId)}
+                    >
+                        &#10094;
+                    </div>
+                ) : null}
                 <span className="value">{quantity}</span>
-                <div
-                    className="arrow"
-                    onClick={() => addItem(cartItem, isBike)}
-                >
-                    &#10095;
-                </div>
+                {status ? (
+                    <div
+                        className="arrow"
+                        onClick={() =>
+                            addItem(cartItem, isBike, isOrder, orderId)
+                        }
+                    >
+                        &#10095;
+                    </div>
+                ) : null}
             </span>
             <span className="price">{price}</span>
-            <div
-                className="remove-button"
-                onClick={() => clearItem(id, isBike)}
-            >
-                &#10005;
-            </div>
+            {status ? (
+                <div
+                    className="remove-button"
+                    onClick={() => clearItem(id, isBike, isOrder, orderId)}
+                >
+                    &#10005;
+                </div>
+            ) : null}
         </div>
     );
 };
 
 const mapDispatchToProps = dispatch => ({
-    clearItem: (itemId, isBike) => dispatch(clearItemFromCart(itemId, isBike)),
-    addItem: (item, isBike) => dispatch(addItemToCart(item, isBike)),
-    removeItem: (itemId, isBike) =>
-        dispatch(removeItemFromCart(itemId, isBike)),
+    clearItem: (itemId, isBike, isOrder, orderId) =>
+        dispatch(clearItemFromCart(itemId, isBike, isOrder, orderId)),
+    addItem: (item, isBike, isOrder, orderId) =>
+        dispatch(addItemToCart(item, isBike, isOrder, orderId)),
+    removeItem: (itemId, isBike, isOrder, orderId) =>
+        dispatch(removeItemFromCart(itemId, isBike, isOrder, orderId)),
 });
 
 export default connect(null, mapDispatchToProps)(CheckoutItem);

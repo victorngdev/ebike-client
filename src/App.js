@@ -13,6 +13,7 @@ import Footer from "./components/footer/footer.component";
 import ProductPage from "./pages/product/product.component";
 import CheckoutPage from './pages/checkout/checkout.component';
 import Apparel from "./pages/apparel/apparel.component";
+import History from "./pages/history/history.component";
 import { setCurrentUser } from "./redux/user/user.actions";
 
 import "./App.css";
@@ -51,6 +52,7 @@ class App extends React.Component {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/catalogs/:bikeId" component={ProductPage} />
                     <Route path="/collections/apparel" component={Apparel} />
+                    <Route path="/orders" component={History} />
                     <Route path="/checkout" render={() => this.props.cartLength === 0 ? (<Redirect to="/" />) : (<CheckoutPage />)} />
                 </Switch>
                 <Footer />

@@ -82,12 +82,14 @@ class CheckoutPage extends React.Component {
                             key={cartItem.id}
                             cartItem={cartItem}
                             isBike
+                            status
                         />
                     ))}
                     {apparelItems.map(apparelItem => (
                         <CheckoutItem
                             key={apparelItem.id}
                             cartItem={apparelItem}
+                            status
                         />
                     ))}
                     <div className="total">

@@ -25,3 +25,10 @@ a:hover {
     min-height: 100vh;
     width: 100%;
 }
+
+:root {
+    --delivered-status: #315bef;
+    --delivering-status: #00d63c;
+    --processing-status: #01c394;
+    --cancelled-status: #e50000;
+}
