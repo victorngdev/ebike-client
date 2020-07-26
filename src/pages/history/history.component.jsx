@@ -6,7 +6,7 @@ import { SemipolarLoading } from "react-loadingg";
 
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectOrders } from "../../redux/cart/cart.selectors";
-import { initOrders } from "../../redux/cart/cart.actions";
+import { initOrders, clearOrders } from "../../redux/cart/cart.actions";
 
 import BookingItem from "../../components/booking-item/booking-item.component";
 
@@ -18,22 +18,34 @@ class History extends React.Component {
         this.props.initOrders(this.props.currentUser.id);
     }
 
+    componentWillUnmount() {
+        this.props.clearOrders();
+    }
+
     render() {
         const { orders } = this.props;
-        return orders.length ? (
+        return orders ? (
             <div className="container">
-                <div className="history-page">
-                    <div className="header">
-                        <div className="title">
-                            <h3>Your orders</h3>
+                {orders.length ? (
+                    <div className="history-page">
+                        <div className="header">
+                            <div className="title">
+                                <h3>Your orders</h3>
+                            </div>
+                        </div>
+                        <div className="order">
+                            {orders.map(order => (
+                                <BookingItem key={order.id} order={order} />
+                            ))}
                         </div>
                     </div>
-                    <div className="order">
-                        {orders.map(order => (
-                            <BookingItem key={order.id} order={order} />
-                        ))}
+                ) : (
+                    <div className="empty-message">
+                        <h2>
+                            You did have no purchase in <span>INTENSE!</span>
+                        </h2>
                     </div>
-                </div>
+                )}
             </div>
         ) : (
             <div className="loading">
@@ -48,4 +60,4 @@ const mapStateToProps = createStructuredSelector({
     orders: selectOrders,
 });
 
-export default connect(mapStateToProps, { initOrders })(History);
+export default connect(mapStateToProps, { initOrders, clearOrders })(History);

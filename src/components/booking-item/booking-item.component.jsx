@@ -2,22 +2,12 @@ import React from "react";
 
 import BookingItemInfo from "../booking-item-info/booking-item-info.component";
 import CheckoutItem from "../checkout-item/checkout-item.component";
-import FormInput from "../form-input/form-input.component";
 
 import "./booking-item.styles.scss";
 import { ReactComponent as MoreArrow } from "../../assets/more-arrow.svg";
 
 class BookingItem extends React.Component {
-    renderModal = ({
-        bikes,
-        apparels,
-        id,
-        customerName,
-        phone,
-        customerEmail,
-        customerAddress,
-        note,
-    }) => {
+    renderModal = ({ bikes, apparels, id }) => {
         return (
             <div
                 className="modal fade"

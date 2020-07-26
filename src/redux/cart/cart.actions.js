@@ -33,3 +33,7 @@ export const clearItemFromCart = (itemId, isBike, isOrder, orderId) => ({
 export const checkout = () => ({
     type: CartActionTypes.CHECKOUT
 })
+
+export const clearOrders = () => dispatch => {
+    dispatch({ type: CartActionTypes.CLEAR_ORDERS })
+}

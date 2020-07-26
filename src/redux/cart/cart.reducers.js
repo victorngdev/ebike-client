@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     hidden: true,
     bikeItems: [],
     apparelItems: [],
-    orders: [],
+    orders: null,
 }
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -105,6 +105,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 bikeItems: [],
                 apparelItems: []
+            }
+        case CartActionTypes.CLEAR_ORDERS:
+            return {
+                ...state,
+                orders: null
             }
         default:
             return state;

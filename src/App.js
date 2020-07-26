@@ -52,7 +52,7 @@ class App extends React.Component {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/catalogs/:bikeId" component={ProductPage} />
                     <Route path="/collections/apparel" component={Apparel} />
-                    <Route path="/orders" component={History} />
+                    <Route path="/orders" render={() => !this.props.currentUser ? (<Redirect to="/" />) : (<History />)} />
                     <Route path="/checkout" render={() => this.props.cartLength === 0 ? (<Redirect to="/" />) : (<CheckoutPage />)} />
                 </Switch>
                 <Footer />
