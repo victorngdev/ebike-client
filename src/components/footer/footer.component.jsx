@@ -13,7 +13,7 @@ class Footer extends React.Component {
         this.state = {
             contact: null,
             request: {
-                email: "",
+                phone: "",
                 message: "",
             },
         };
@@ -26,7 +26,13 @@ class Footer extends React.Component {
     }
 
     handleSubmit = event => {
+        const { phone, message } = this.state.request;
         event.preventDefault();
+        api.post("/contacts", {
+            phone: phone,
+            message: message,
+        }).then(response => console.log(response.data));
+        this.setState({ request: { phone: "", message: "" } });
     };
 
     handleChange = event => {
@@ -73,10 +79,11 @@ class Footer extends React.Component {
                         <div className="content">
                             <form onSubmit={this.handleSubmit}>
                                 <FormInput
-                                    name="email"
-                                    type="email"
-                                    label="Email"
-                                    value={this.state.request.email}
+                                    name="phone"
+                                    type="text"
+                                    label="Phone"
+                                    maxLength="11"
+                                    value={this.state.request.phone}
                                     handleChange={this.handleChange}
                                     required
                                 />
@@ -91,7 +98,9 @@ class Footer extends React.Component {
                                     rows="2"
                                 />
                                 <div className="btn-custom-footer">
-                                    <CustomButton>Send</CustomButton>
+                                    <CustomButton onClick={this.handleSubmit}>
+                                        Send
+                                    </CustomButton>
                                 </div>
                             </form>
                         </div>
