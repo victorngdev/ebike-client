@@ -5,10 +5,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import "./elementor-populate.styles.scss";
 
 class ElementorPopulate extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
+    state = {
             populate: {
                 title: "50,000+ Riders and Counting",
                 content:
@@ -17,7 +14,6 @@ class ElementorPopulate extends React.Component {
                 imageUrl: "https://i.ibb.co/Ksj7w9y/HERO-2-scaled.jpg",
             },
         };
-    }
 
     render() {
         const { title, content, action, imageUrl } = this.state.populate;

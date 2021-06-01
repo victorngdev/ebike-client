@@ -3,19 +3,14 @@ import React from "react";
 import api from "../../apis/api";
 
 import AwardLineupItem from "../award-lineup-item/award-lineup-item.component";
+import data from "./award.data";
 
 import "./award-lineup.styles.scss";
 
 class AwardLineup extends React.Component {
     state = {
-        collections: [],
+        collections: data,
     };
-
-    componentDidMount() {
-        api.get("/bikes").then(response =>
-            this.setState({ collections: response.data })
-        );
-    }
 
     render() {
         const { collections } = this.state;

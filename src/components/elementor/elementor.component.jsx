@@ -2,33 +2,21 @@ import React from "react";
 
 import ElementorBanner from "../elementor-header/elementor-header.component";
 import ElementorRow from "../elementor-row/elementor-row.component";
-import api from "../../apis/api";
 
 import "./elementor.styles.scss";
+import data from "./elementor.data";
 
 class Elementor extends React.Component {
-    constructor() {
-        super();
-        this.state = {
+        state = {
             elementorHeader: null,
             elementors: [],
         };
-    }
 
     componentDidMount() {
-        api.get("/elementors").then(response =>
-            this.setState({ elementors: response.data }, () => {
-                const elementorHeader = response.data.find(
-                    elementor => typeof elementor.imageUrl === "undefined"
-                );
-                this.setState({ elementorHeader });
-                this.setState({
-                    elementors: this.state.elementors.filter(
-                        elementor => typeof elementor.imageUrl !== "undefined"
-                    ),
-                });
-            })
-        );
+        this.setState({
+            elementorHeader: data[4],
+            elementors: data.filter(e=> typeof e.imageUrl !== "undefined")
+        });
     }
 
     render() {
