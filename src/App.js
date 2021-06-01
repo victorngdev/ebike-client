@@ -55,7 +55,7 @@ class App extends React.Component {
                     <Route path="/orders" render={() => !this.props.currentUser ? (<Redirect to="/" />) : (<History />)} />
                     <Route path="/checkout" render={() => this.props.cartLength === 0 ? (<Redirect to="/" />) : (<CheckoutPage />)} />
                 </Switch>
-                <Footer />
+                <Footer />clear
             </div>
         )
     }

@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { SemipolarLoading } from "react-loadingg";
 
-import api from "../../apis/api";
 import ProductSpecification from "../../components/product-specification/product-specification.component";
 import CatalogItem from "../../components/catalog-item/catalog-item.component";
+import data from "./catalog.data";
 
 import "./catalog.styles.scss";
 
@@ -15,12 +15,7 @@ class ProductCatalog extends React.Component {
     };
 
     componentDidMount() {
-        api.get("/bikes").then(response =>
-            this.setState({
-                collections: response.data,
-                selectedItem: response.data[0],
-            })
-        );
+        this.setState({collections: data, selectedItem: data[0]});
     }
 
     renderHeader = () => (
